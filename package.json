@@ -42,7 +42,7 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "drizzle-kit": "^0.31.0",
-    "eslint": "^9.36.0",
+    "eslint": "^10.15.0",
     "eslint-config-next": "^16.0.0",
     "husky": "^9.1.0",
     "lint-staged": "^16.0.0",
