@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Install, check, test, build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      HUSKY: "0"
+      # Not needed for the build: the environment is read at boot, not on import. Kept so that any step
+      # that starts the server passes the boot check. None of these values is a secret.
+      DATABASE_URL: postgres://ci:ci@localhost:5432/ci
+      AUTH_SECRET: ci-placeholder-secret-not-for-production-use
+      APP_URL: http://localhost:3000
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install (lockfile must be up to date)
+        run: pnpm install --frozen-lockfile
+
+      - name: Static checks (imports, exports, Next.js boundaries)
+        run: pnpm check:static
+
+      - name: Type check
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Format check
+        run: pnpm format:check
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: Dependency audit (fail on critical)
+        run: pnpm audit --prod --audit-level=critical
+
+      - name: Build
+        run: pnpm build

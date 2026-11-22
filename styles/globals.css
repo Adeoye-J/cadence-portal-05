@@ -1,0 +1,241 @@
+/*
+ * Cadence design tokens, one canonical set. Values come from the Stitch designs' shared colour
+ * configuration (the most common across screens). Design semantic names (surface-container-*,
+ * on-surface, primary-container, ...) are defined here so the ported designs keep their classes.
+ * See docs/design-decisions.md for the canonical choices and where they differ from older notes.
+ */
+@import "tailwindcss";
+
+/* Dark mode is applied by the html element's "dark" class, set from the user's theme preference. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Surfaces */
+  --color-canvas: #faf9f5;
+  --color-surface: #ffffff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f5f4f0;
+  --color-surface-container: #efeeea;
+  --color-surface-container-high: #e9e8e4;
+  --color-surface-container-highest: #e3e2df;
+  --color-surface-variant: #e3e2df;
+  --color-surface-dim: #dbdad6;
+  --color-border: #e4e2dc;
+  --color-overlay: rgb(27 28 26 / 0.4);
+
+  /* Text and outlines */
+  --color-ink: #1b1c1a;
+  --color-on-surface: #1b1c1a;
+  --color-on-surface-variant: #3f4946;
+  --color-ink-muted: #575f6c;
+  --color-outline: #6f7976;
+  --color-outline-variant: #bfc9c5;
+
+  /* Brand: primary is the text and hover colour; primary-container is the fill */
+  --color-primary: #004138;
+  --color-primary-container: #0e5a4f;
+  --color-primary-hover: #004138;
+  --color-primary-active: #004138;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #8ccfc1;
+  --color-primary-fixed: #acf0e1;
+  --color-primary-fixed-dim: #90d3c5;
+  --color-on-primary-fixed: #00201b;
+  --color-secondary: #575f6c;
+  --color-on-secondary: #ffffff;
+  --color-secondary-container: #d8e0ef;
+  --color-on-secondary-container: #5b6370;
+  --color-tertiary: #543100;
+  --color-tertiary-container: #744500;
+  --color-tertiary-fixed: #ffdcbb;
+  --color-tertiary-fixed-dim: #ffb869;
+  --color-on-tertiary: #ffffff;
+
+  /* The remaining tokens the designs use */
+  --color-background: #faf9f5;
+  --color-on-background: #1b1c1a;
+  --color-surface-bright: #faf9f5;
+  --color-surface-tint: #24695d;
+  --color-inverse-surface: #30312e;
+  --color-inverse-on-surface: #f2f1ed;
+  --color-inverse-primary: #90d3c5;
+  --color-on-primary-fixed-variant: #005046;
+  --color-secondary-fixed: #dbe3f2;
+  --color-secondary-fixed-dim: #bfc7d6;
+  --color-on-secondary-fixed: #141c27;
+  --color-on-secondary-fixed-variant: #3f4754;
+  --color-on-tertiary-container: #fdb360;
+  --color-on-tertiary-fixed: #2b1700;
+  --color-on-tertiary-fixed-variant: #673d00;
+
+  /* Errors and status */
+  --color-error: #ba1a1a;
+  --color-on-error: #ffffff;
+  --color-error-container: #ffdad6;
+  --color-on-error-container: #93000a;
+  --color-danger: #ba1a1a;
+  --color-danger-subtle: #ffdad6;
+  --color-danger-border: #ffdad6;
+  --color-waiting: #8a5300;
+  --color-waiting-subtle: #fff4e0;
+  --color-waiting-border: #fff4e0;
+  --color-done: #1f6b45;
+  --color-done-subtle: #e8f5ee;
+  --color-done-border: #e8f5ee;
+
+  /* Shapes, by role */
+  --radius-control: 10px;
+  --radius-card: 12px;
+  --radius-menu: 8px;
+
+  --shadow-float: 0 1px 2px rgb(0 0 0 / 0.03), 0 4px 12px rgb(0 0 0 / 0.04);
+
+  /* Spacing names used by the designs (the default scale is 4px per unit) */
+  --spacing-gutter: 1.5rem;
+  --spacing-gutter-mobile: 1rem;
+  --spacing-margin: 2rem;
+  --spacing-margin-mobile: 1rem;
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2rem;
+
+  /* Type scale (Inter). Mobile sizes are applied with sm: overrides. */
+  --text-headline-xl: 2.25rem;
+  --text-headline-xl--line-height: 2.75rem;
+  --text-headline-xl--letter-spacing: -0.02em;
+  --text-headline-xl--font-weight: 600;
+  --text-headline-lg: 1.75rem;
+  --text-headline-lg--line-height: 2.25rem;
+  --text-headline-lg--letter-spacing: -0.02em;
+  --text-headline-lg--font-weight: 600;
+  --text-headline-md: 1.25rem;
+  --text-headline-md--line-height: 1.75rem;
+  --text-headline-md--letter-spacing: -0.015em;
+  --text-headline-md--font-weight: 600;
+  --text-headline-sm: 1rem;
+  --text-headline-sm--line-height: 1.5rem;
+  --text-headline-sm--letter-spacing: -0.01em;
+  --text-headline-sm--font-weight: 600;
+  --text-body-lg: 1rem;
+  --text-body-lg--line-height: 1.5rem;
+  --text-body-lg-medium: 1rem;
+  --text-body-lg-medium--line-height: 1.5rem;
+  --text-body-lg-medium--font-weight: 500;
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.25rem;
+  --text-body-sm-medium: 0.875rem;
+  --text-body-sm-medium--line-height: 1.25rem;
+  --text-body-sm-medium--font-weight: 500;
+  --text-label-md: 0.75rem;
+  --text-label-md--line-height: 1rem;
+  --text-label-md--letter-spacing: 0.02em;
+  --text-label-md--font-weight: 600;
+  --text-label-sm: 0.6875rem;
+  --text-label-sm--line-height: 0.875rem;
+  --text-label-sm--letter-spacing: 0.04em;
+  --text-label-sm--font-weight: 500;
+}
+
+/* Dark palette. The same token names, with dark values. */
+.dark {
+  --color-canvas: #0f1216;
+  --color-surface: #161b22;
+  --color-surface-container-lowest: #161b22;
+  --color-surface-container-low: #1a2029;
+  --color-surface-container: #1e2530;
+  --color-surface-container-high: #262c36;
+  --color-surface-container-highest: #2f3742;
+  --color-surface-variant: #2f3742;
+  --color-surface-dim: #0c0f13;
+  --color-border: #262c36;
+  --color-overlay: rgb(0 0 0 / 0.7);
+
+  --color-ink: #f1f3f5;
+  --color-on-surface: #f1f3f5;
+  --color-on-surface-variant: #c4cad0;
+  --color-ink-muted: #9ca3af;
+  --color-outline: #8b948f;
+  --color-outline-variant: #3f4946;
+
+  --color-primary: #90d3c5;
+  --color-primary-container: #198172;
+  --color-primary-hover: #90d3c5;
+  --color-primary-active: #90d3c5;
+  --color-on-primary: #00201b;
+  --color-on-primary-container: #ffffff;
+  --color-primary-fixed: #123d36;
+  --color-primary-fixed-dim: #1f5f53;
+  --color-on-primary-fixed: #acf0e1;
+  --color-secondary: #aab2c0;
+  --color-secondary-container: #2a3140;
+  --color-on-secondary-container: #cdd3dd;
+  --color-tertiary: #ffb869;
+  --color-tertiary-container: #744500;
+  --color-tertiary-fixed: #4a2e0a;
+  --color-tertiary-fixed-dim: #ffb869;
+
+  --color-background: #0f1216;
+  --color-on-background: #f1f3f5;
+  --color-surface-bright: #2f3742;
+  --color-surface-tint: #90d3c5;
+  --color-inverse-surface: #e3e2df;
+  --color-inverse-on-surface: #30312e;
+  --color-inverse-primary: #0e5a4f;
+  --color-on-primary-fixed-variant: #acf0e1;
+  --color-secondary-fixed: #2a3140;
+  --color-secondary-fixed-dim: #aab2c0;
+  --color-on-secondary-fixed: #dbe3f2;
+  --color-on-secondary-fixed-variant: #bfc7d6;
+  --color-on-tertiary-container: #ffdcbb;
+  --color-on-tertiary-fixed: #ffdcbb;
+  --color-on-tertiary-fixed-variant: #ffb869;
+
+  --color-error: #f87171;
+  --color-error-container: #330f0d;
+  --color-on-error-container: #ffdad6;
+  --color-danger: #f87171;
+  --color-danger-subtle: #330f0d;
+  --color-danger-border: #661d1a;
+  --color-waiting: #ffb347;
+  --color-waiting-subtle: #2b1d00;
+  --color-waiting-border: #593a00;
+  --color-done: #4ade80;
+  --color-done-subtle: #0b291a;
+  --color-done-border: #165634;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    background-color: var(--color-canvas);
+    color: var(--color-ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Financial figures, timestamps and percentages: always tabular. */
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+}

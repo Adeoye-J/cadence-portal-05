@@ -1,0 +1,65 @@
+{
+  "name": "cadence-portal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cadence: client delivery portal (proposals, sign-off, milestones, payments).",
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "test": "vitest run",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "check:static": "node scripts/checks/imports.mjs && node scripts/checks/named-imports.mjs && node scripts/checks/next-boundaries.mjs && node scripts/checks/lucide-names.mjs && node scripts/checks/db-usage.mjs && node scripts/checks/links.mjs && node scripts/checks/tailwind-classes.mjs && node scripts/checks/next-rules.mjs && node scripts/checks/react-rules.mjs",
+    "prepare": "husky",
+    "format:check": "prettier --check .",
+    "db:seed": "tsx db/seed/index.ts"
+  },
+  "dependencies": {
+    "@better-auth/passkey": "^1.3.0",
+    "better-auth": "^1.3.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "drizzle-orm": "^0.44.0",
+    "lucide-react": "^0.383.0",
+    "next": "^16.0.0",
+    "pg": "^8.16.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tailwind-merge": "^3.0.0",
+    "zod": "^4.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.0",
+    "@types/node": "^24.0.0",
+    "@types/pg": "^8.15.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "drizzle-kit": "^0.31.0",
+    "eslint": "^9.36.0",
+    "eslint-config-next": "^16.0.0",
+    "husky": "^9.1.0",
+    "lint-staged": "^16.0.0",
+    "postcss": "^8.5.0",
+    "prettier": "^3.6.0",
+    "tailwindcss": "^4.1.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0",
+    "vitest": "^3.2.0"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,mjs}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,css,yml,yaml}": [
+      "prettier --write"
+    ]
+  }
+}
